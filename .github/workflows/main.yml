@@ -7,11 +7,11 @@ jobs:
   update_html_and_readme:
     runs-on: ubuntu-latest
     steps: 
-      # Step 1: Checkout the repository
+ 
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Check actor and update index.html
+ 
       - name: Check Actor and Update index.html
         run: |
           echo "Current actor: ${{ github.actor }}"
@@ -19,7 +19,14 @@ jobs:
             sed -i '/<\/body>/i <p>Updated by Team Leader on '"$(date)"'</p>' index.html
           fi
 
-      # Step 3: Commit changes
+ 
+        #STEP 3 - UPDATE README
+        
+      - name: Log Commit to README
+        run: |
+          echo "### Updated by ${{ github.actor }} on $(date) [commit: ${{ github.sha }}]" >> README.md
+
+
       - name: Commit Changes
         run: |
           git config --global user.email "williammcnamara2004@gmail.com"
