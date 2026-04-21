@@ -1,10 +1,8 @@
 name: Collaborative Workflow
-
 on: 
   push:
     branches:
       - main
-
 jobs: 
   update_html_and_readme:
     runs-on: ubuntu-latest
@@ -12,3 +10,20 @@ jobs:
       # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      # Step 2: Check actor and update index.html
+      - name: Check Actor and Update index.html
+        run: |
+          echo "Current actor: ${{ github.actor }}"
+          if [ "${{ github.actor }}" == "T3rrako" ]; then
+            echo "<p>Updated by T3rrako</p>" >> index.html
+          fi
+
+      # Step 3: Commit changes
+      - name: Commit Changes
+        run: |
+          git config --global user.email "your@email.com"
+          git config --global user.name "T3rrako"
+          git add index.html
+          git commit -m "updated index.html by ${{ github.actor }}"
+          git push
