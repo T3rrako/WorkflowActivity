@@ -22,7 +22,7 @@ jobs:
       # Step 3: Commit changes
       - name: Commit Changes
         run: |
-          git config --global user.email "your@email.com"
+          git config --global user.email "williammcnamara2004@gmail.com"
           git config --global user.name "T3rrako"
           git add index.html
           git commit -m "updated index.html by ${{ github.actor }}"
